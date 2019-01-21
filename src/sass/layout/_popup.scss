@@ -1,0 +1,109 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba($color-black, .9);
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 80%;
+        z-index: 21;
+        background-color: $color-white;
+        border-radius: 3px;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        opacity: 0;
+        transition: all .3s .2s;
+    }
+
+    &:target &__content {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    &__picture-column {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__img {
+        width: 100%;
+        display: block;
+        z-index: 22;
+        transform: scale(1.005);
+    }
+
+    &__icon-box {
+        display: inline-block;
+        width: 4rem;
+        height: 4rem;
+        position: absolute;
+        background-color: transparent;
+        top: 3rem;
+        right: 6rem;
+    }
+
+    &__icon {
+        position: absolute;
+        background-color: transparent;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%);
+        
+        &, &::before, &::after{
+            width: 3rem;
+            height: 2px;
+            display: inline-block;
+            z-index: 22;
+            transition: all .2s;
+        }
+
+        &::before, &::after {
+            content: '';
+            background-color: $color-grey-darkest;
+            display: block;
+            position: absolute;
+        }
+
+        &::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        &::after {
+            top: 0;
+            transform: rotate(-45deg);
+        }
+            
+    }
+
+    &__icon-box:hover &__icon,
+    &__icon-box:active &__icon {
+
+        &::before, &::after {
+            background-color: $color-primary;
+        }
+
+    }
+
+    &__text-column {
+        width: 100%;
+        padding-right: 8rem;
+        padding-top: 10%;
+    }
+
+
+}

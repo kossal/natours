@@ -1,0 +1,86 @@
+//Media Query Manager
+/*
+0 - 600px:          Phone
+600px - 900px:      Tablet portrait
+900px - 1200px:     Tablet landscape
+1200px - 1800px:    Normal
+1800px - :          Big desktop
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desk
+*/
+
+@mixin respond ($breakpoint) {
+    
+    @if $breakpoint == phone {
+
+        @media only screen and (max-width: 37.5em){@content;} //600px
+
+    } @else if $breakpoint == tab-port {
+
+        @media only screen and (max-width: 56.25em){@content;} //900px
+
+    } @else if $breakpoint == tab-land {
+
+        @media only screen and (max-width: 75em){@content;} //1200px
+
+    } @else if $breakpoint == big-desk {
+
+        @media only screen and (min-width: 112.5em){@content;} //1800px
+
+    } @else {
+
+        @warn Los argumentos de respond estan mal escritos;
+        @debug Tu argumento $breakpoint no es igual a phone, tab-port, tab-land o big-desk;
+        
+    }
+
+}
+
+// Clearfix
+
+@mixin clearfix {
+
+    &::before, &::after {
+        content: '';
+        display: block;
+    }
+
+    &::after {
+        clear: both;
+    }
+
+    &::after {
+        zoom: 1;
+    }
+
+}
+
+// Grid
+
+@mixin grid($from, $to, $hzGutter: 0) {
+
+    @for $i from $from to $to + 1 {
+
+        .col-#{$i}-of-#{$to} {
+            width: calc( #{$i} * ( ( 100% - (#{$to} - 1) * #{$hzGutter} ) / #{$to} ) + (#{$i} - 1) * #{$hzGutter} );
+        }
+
+    }
+
+}
+
+@mixin gridSmall($from, $to) {
+
+    @for $i from $from to $to + 1 {
+
+        .col-#{$i}-of-#{$to} {
+            width: 100%;
+        }
+
+    }
+
+}
